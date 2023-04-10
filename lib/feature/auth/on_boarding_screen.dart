@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:only_guides/config/check_premium.dart';
 
 import 'package:only_guides/core/app_images.dart';
 import 'package:only_guides/feature/auth/page_view.dart';
 import 'package:only_guides/feature/auth/premium_screen.dart';
+import 'package:only_guides/widgets/buttom_navigator.dart';
 import 'package:only_guides/widgets/custom_button.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -56,14 +58,25 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               height: 45,
               text: 'Continue',
               onPressed: () async {
+                final isBuy = await CheckPremium.getSubscription();
                 if (currantPage == 2) {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const PremiumScreen(),
-                    ),
-                    (protected) => false,
-                  );
+                  if (!isBuy) {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PremiumScreen(),
+                      ),
+                      (protected) => false,
+                    );
+                  } else {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const BottomNavigatorScreen(),
+                      ),
+                      (protected) => false,
+                    );
+                  }
                 } else {
                   controller.nextPage(
                     duration: const Duration(milliseconds: 300),

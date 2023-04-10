@@ -1,30 +1,28 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:only_guides/config/check_premium.dart';
 import 'package:only_guides/core/app_colors.dart';
 import 'package:only_guides/core/app_text_styles.dart';
-import 'package:only_guides/feature/author/detail_author_screen.dart';
-import 'package:only_guides/logic/models/preset_model.dart';
+import 'package:only_guides/feature/news/news_detail_screen.dart';
+import 'package:only_guides/logic/models/news_model.dart';
 import 'package:only_guides/widgets/spaces.dart';
 
 import 'package:shimmer/shimmer.dart';
 
-class WidgetContainer extends StatelessWidget {
-  const WidgetContainer({
+class NewsWidgetContainer extends StatelessWidget {
+  const NewsWidgetContainer({
     Key? key,
     required this.model,
   }) : super(key: key);
-  final PresetModel model;
+  final NewsModel model;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: ()  {
-        
+      onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DetailAuthorScreen(model: model),
+            builder: (context) => NewsDetailScreen(model: model),
           ),
         );
       },
@@ -75,7 +73,7 @@ class WidgetContainer extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(24),
                   alignment: Alignment.bottomCenter,
                   width: getWidth(context),
                   height: 254,
@@ -90,11 +88,40 @@ class WidgetContainer extends StatelessWidget {
                       ],
                     ),
                   ),
-                  child: Text(
-                    model.title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppTextStyles.s19W700(color: Colors.white),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          CircleAvatar(
+                            backgroundImage: CachedNetworkImageProvider(
+                              model.image,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Text(
+                            model.authorName,
+                            style: AppTextStyles.s15W700(
+                              color: Colors.white,
+                            ),
+                          )
+                        ],
+                      ),
+                      const Spacer(),
+                      Text(
+                        model.title,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTextStyles.s19W700(color: Colors.white),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        model.description,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTextStyles.s15W400(color: Colors.white),
+                      ),
+                    ],
                   ),
                 )
               ],

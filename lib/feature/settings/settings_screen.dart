@@ -27,63 +27,89 @@ class SettingsScreen extends StatelessWidget {
                 style: AppTextStyles.s19W700(color: AppColors.color008BCEBlue2),
               ),
               const SizedBox(height: 24),
-              Container(
-                padding: const EdgeInsets.all(12),
-                height: 140,
-                width: getWidth(context),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: AppColors.color00ADEFBlue1),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 12),
-                    InkWell(
-                      onTap: () async {
-                        await CheckPremium.setSubscription();
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const PremiumScreen(),
-                          ),
-                          (protected) => false,
-                        );
-                      },
-                      child: Row(
+              FutureBuilder(
+                  future: CheckPremium.getSubscription(),
+                  builder: (context, AsyncSnapshot<bool?> snapshot) {
+                    if (snapshot.hasData) {
+                      {
+                        if (snapshot.data!) {
+                          return Container(
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.all(12),
+                            height: 100,
+                            width: getWidth(context),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              border:
+                                  Border.all(color: AppColors.color00ADEFBlue1),
+                            ),
+                            child: WidgetRow(
+                              onTap: () {},
+                              icon: AppImages.restoryIcon,
+                              text: "Restore purchases",
+                            ),
+                          );
+                        }
+                      }
+                    }
+                    return Container(
+                      padding: const EdgeInsets.all(12),
+                      height: 140,
+                      width: getWidth(context),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: AppColors.color00ADEFBlue1),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const SizedBox(width: 12),
-                          Image.asset(
-                            AppImages.crownIconBlue,
-                            width: 20,
+                          const SizedBox(height: 12),
+                          InkWell(
+                            onTap: () async {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const PremiumScreen(
+                                    isPop: true,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Row(
+                              children: [
+                                const SizedBox(width: 12),
+                                Image.asset(
+                                  AppImages.crownIconBlue,
+                                  width: 20,
+                                ),
+                                const SizedBox(width: 12),
+                                Text(
+                                  "Pro version \$0,99",
+                                  style: AppTextStyles.s15W400(
+                                      color: AppColors.color008BCEBlue2),
+                                ),
+                                const Spacer(),
+                                const Icon(
+                                  Icons.chevron_right,
+                                  color: AppColors.color008BCEBlue2,
+                                ),
+                                const SizedBox(width: 12),
+                              ],
+                            ),
                           ),
-                          const SizedBox(width: 12),
-                          Text(
-                            "Pro version \$0,99",
-                            style: AppTextStyles.s15W400(
-                                color: AppColors.color008BCEBlue2),
-                          ),
-                          const Spacer(),
-                          Icon(
-                            Icons.chevron_right,
+                          const Divider(
                             color: AppColors.color008BCEBlue2,
                           ),
-                          const SizedBox(width: 12),
+                          const SizedBox(height: 12),
+                          WidgetRow(
+                            onTap: () {},
+                            icon: AppImages.restoryIcon,
+                            text: "Restore purchases",
+                          )
                         ],
                       ),
-                    ),
-                    Divider(
-                      color: AppColors.color008BCEBlue2,
-                    ),
-                    const SizedBox(height: 12),
-                    WidgetRow(
-                      onTap: () {},
-                      icon: AppImages.restoryIcon,
-                      text: "Restore purchases",
-                    )
-                  ],
-                ),
-              ),
+                    );
+                  }),
               const SizedBox(height: 24),
               Container(
                 padding: const EdgeInsets.all(12),

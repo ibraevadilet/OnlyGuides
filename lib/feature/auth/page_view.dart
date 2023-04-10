@@ -29,7 +29,7 @@ class PageViewWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 80),
-          Container(
+          SizedBox(
             height: 285,
             child: Center(
               child: Image.asset(image),

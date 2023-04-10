@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:only_guides/core/app_colors.dart';
 import 'package:only_guides/core/app_images.dart';
 import 'package:only_guides/core/app_text_styles.dart';
+import 'package:only_guides/logic/models/preset_model.dart';
 import 'package:only_guides/widgets/spaces.dart';
 import 'package:shimmer/shimmer.dart';
 
 class DetailAuthorScreen extends StatelessWidget {
-  const DetailAuthorScreen({Key? key}) : super(key: key);
+  const DetailAuthorScreen({Key? key, required this.model}) : super(key: key);
+  final PresetModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,7 @@ class DetailAuthorScreen extends StatelessWidget {
                 ),
                 const SizedBox(width: 25),
                 Text(
-                  "Instagram design example",
+                  model.title,
                   style:
                       AppTextStyles.s19W700(color: AppColors.color008BCEBlue2),
                 )
@@ -40,7 +42,7 @@ class DetailAuthorScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             CachedNetworkImage(
-              imageUrl: "https://autodmir.ru/logo/1/2312/photo.jpg",
+              imageUrl: model.image,
               placeholder: (_, url) {
                 return SizedBox(
                   width: getWidth(context),
@@ -64,8 +66,7 @@ class DetailAuthorScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                     image: DecorationImage(
-                      image: NetworkImage(
-                          "https://autodmir.ru/logo/1/2312/photo.jpg"),
+                      image: NetworkImage(model.image),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -74,7 +75,7 @@ class DetailAuthorScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Text(
-              "Lorem ipsum dolor sit amet,",
+              model.description,
               textAlign: TextAlign.start,
               style: AppTextStyles.s19W400(color: Colors.black),
             )

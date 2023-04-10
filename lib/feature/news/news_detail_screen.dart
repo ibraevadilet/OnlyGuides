@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:only_guides/core/app_colors.dart';
 import 'package:only_guides/core/app_images.dart';
 import 'package:only_guides/core/app_text_styles.dart';
-import 'package:only_guides/logic/models/guide_model.dart';
+import 'package:only_guides/logic/models/news_model.dart';
 import 'package:only_guides/widgets/spaces.dart';
 import 'package:shimmer/shimmer.dart';
 
-class DetailHomeScreen extends StatelessWidget {
-  const DetailHomeScreen({Key? key, required this.model}) : super(key: key);
-  final GuideModel model;
+class NewsDetailScreen extends StatelessWidget {
+  const NewsDetailScreen({Key? key, required this.model}) : super(key: key);
+  final NewsModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -37,15 +37,46 @@ class DetailHomeScreen extends StatelessWidget {
                     );
                   },
                   imageBuilder: (_, imageProvider) {
-                    return Container(
-                      width: getWidth(context),
-                      height: 500,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(model.image),
-                          fit: BoxFit.cover,
+                    return Stack(
+                      children: [
+                        Container(
+                          width: getWidth(context),
+                          height: 500,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(model.image),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
-                      ),
+                        Positioned(
+                          left: 24,
+                          top: 24,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 3,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              gradient: const LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  Color(0xffABE8FF),
+                                  Color(0xff1E91EE),
+                                ],
+                              ),
+                            ),
+                            child: Text(
+                              model.newsType,
+                              style: AppTextStyles.s15W400(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
                     );
                   },
                 ),

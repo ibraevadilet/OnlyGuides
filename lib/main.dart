@@ -4,7 +4,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:only_guides/feature/auth/splash_screen.dart';
-import 'package:only_guides/widgets/buttom_navigator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:rate_my_app/rate_my_app.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'config/app_config.dart';
@@ -13,6 +13,8 @@ import 'services/notification_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await Apphud.start(apiKey: AppConfig.apphudKey);
+  final prefs = await SharedPreferences.getInstance();
+  prefs.setBool('ISBUY', false);
 
   await Firebase.initializeApp(
     options: const FirebaseOptions(
