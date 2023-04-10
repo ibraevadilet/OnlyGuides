@@ -52,6 +52,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               ],
             ),
           ),
+          const SizedBox(height: 10),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25),
             child: CustomButton(
@@ -86,7 +87,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               },
             ),
           ),
-          const SizedBox(height: 90),
+          const SizedBox(height: 80),
         ],
       ),
     );

@@ -28,14 +28,14 @@ class PageViewWidget extends StatelessWidget {
               color: AppColors.color008BCEBlue2,
             ),
           ),
-          const SizedBox(height: 80),
+          const Spacer(),
           SizedBox(
             height: 285,
             child: Center(
               child: Image.asset(image),
             ),
           ),
-          const SizedBox(height: 70),
+          const Spacer(),
           Text(
             text,
             textAlign: TextAlign.center,

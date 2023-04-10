@@ -20,21 +20,13 @@ class HomeScreen extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 24),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Guide",
-                      style: AppTextStyles.s19W700(
-                          color: AppColors.color008BCEBlue2),
-                    ),
-                    Image.asset(
-                      AppImages.fireIcon,
-                      width: 20,
-                    )
-                  ],
+                Text(
+                  "Guides",
+                  style:
+                      AppTextStyles.s19W700(color: AppColors.color008BCEBlue2),
                 ),
                 const SizedBox(height: 20),
                 Expanded(
