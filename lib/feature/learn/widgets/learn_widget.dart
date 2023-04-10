@@ -74,30 +74,36 @@ class LearnWidget extends StatelessWidget {
           },
         ),
         const SizedBox(width: 20),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              model.title,
-              style: AppTextStyles.s19W700(
-                color: AppColors.color008BCEBlue2,
+        Flexible(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                model.title,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: AppTextStyles.s19W700(
+                  color: AppColors.color008BCEBlue2,
+                ),
               ),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              model.time,
-              style: AppTextStyles.s13W700(
-                color: AppColors.color008BCEBlue2,
+              const SizedBox(height: 4),
+              Text(
+                model.time,
+                style: AppTextStyles.s13W700(
+                  color: AppColors.color008BCEBlue2,
+                ),
               ),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              model.description,
-              style: AppTextStyles.s13W400(
-                color: AppColors.color008BCEBlue2,
+              const SizedBox(height: 4),
+              Text(
+                model.description,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: AppTextStyles.s13W400(
+                  color: AppColors.color008BCEBlue2,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         )
       ],
     );

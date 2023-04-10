@@ -33,10 +33,14 @@ class DetailAuthorScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 25),
-                Text(
-                  model.title,
-                  style:
-                      AppTextStyles.s19W700(color: AppColors.color008BCEBlue2),
+                Flexible(
+                  child: Text(
+                    model.title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: AppTextStyles.s19W700(
+                        color: AppColors.color008BCEBlue2),
+                  ),
                 )
               ],
             ),

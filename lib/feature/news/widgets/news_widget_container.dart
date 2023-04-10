@@ -95,7 +95,7 @@ class NewsWidgetContainer extends StatelessWidget {
                         children: [
                           CircleAvatar(
                             backgroundImage: CachedNetworkImageProvider(
-                              model.image,
+                              model.authorImage,
                             ),
                           ),
                           const SizedBox(width: 12),
