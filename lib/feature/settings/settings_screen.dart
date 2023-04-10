@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:only_guides/config/app_config.dart';
 import 'package:only_guides/config/check_premium.dart';
+import 'package:only_guides/config/check_restore.dart';
 import 'package:only_guides/core/app_colors.dart';
 import 'package:only_guides/core/app_images.dart';
 import 'package:only_guides/core/app_text_styles.dart';
@@ -102,7 +103,7 @@ class SettingsScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 12),
                           WidgetRow(
-                            onTap: () {},
+                            onTap: () => CheckRestore.checkRestore(context),
                             icon: AppImages.restoryIcon,
                             text: "Restore purchases",
                           )
@@ -169,12 +170,6 @@ class SettingsScreen extends StatelessWidget {
                       },
                       icon: AppImages.supportIcon,
                       text: "Support",
-                    ),
-                    const SizedBox(height: 12),
-                    WidgetRow(
-                      onTap: () {},
-                      icon: AppImages.rateIcon,
-                      text: "Rate us",
                     ),
                   ],
                 ),

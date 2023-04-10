@@ -1,3 +1,4 @@
+import 'package:apphud/apphud.dart';
 import 'package:flutter/material.dart';
 import 'package:only_guides/config/app_config.dart';
 import 'package:only_guides/config/check_premium.dart';
@@ -31,15 +32,9 @@ class PremiumScreen extends StatelessWidget {
                       color: AppColors.color008BCEBlue2,
                     ),
                   ),
-                  Text(
-                    "no thanks",
-                    style: AppTextStyles.s15W400(
-                      color: AppColors.color008BCEBlue2,
-                    ),
-                  )
                 ],
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 20),
               Image.asset(
                 AppImages.premiumImage,
                 height: 285,
@@ -96,13 +91,23 @@ class PremiumScreen extends StatelessWidget {
               CustomButton(
                 text: 'Buy Premium for \$1.99',
                 onPressed: () async {
-                  await CheckPremium.setSubscription();
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const BottomNavigatorScreen(),
-                    ),
-                    (protected) => false,
+                  var paywalls = await Apphud.paywalls();
+                  await Apphud.purchase(
+                    product: paywalls?.paywalls.first.products!.first,
+                  ).whenComplete(
+                    () async {
+                      if (await Apphud.hasActiveSubscription() ||
+                          await Apphud.hasPremiumAccess()) {
+                        await CheckPremium.setSubscription();
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const BottomNavigatorScreen(),
+                          ),
+                          (protected) => false,
+                        );
+                      }
+                    },
                   );
                 },
               ),
