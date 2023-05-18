@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:only_guides/config/check_premium.dart';
+import 'package:only_guides/utils/check_premium.dart';
 import 'package:only_guides/core/app_colors.dart';
 import 'package:only_guides/core/app_text_styles.dart';
 import 'package:only_guides/feature/auth/premium_screen.dart';

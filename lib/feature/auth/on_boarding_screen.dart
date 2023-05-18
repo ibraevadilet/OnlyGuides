@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:only_guides/config/check_premium.dart';
+import 'package:only_guides/utils/check_premium.dart';
 
 import 'package:only_guides/core/app_images.dart';
 import 'package:only_guides/feature/auth/page_view.dart';

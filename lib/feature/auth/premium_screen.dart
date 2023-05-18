@@ -1,13 +1,14 @@
 import 'package:apphud/apphud.dart';
 import 'package:flutter/material.dart';
-import 'package:only_guides/config/app_config.dart';
-import 'package:only_guides/config/check_premium.dart';
+import 'package:only_guides/utils/check_premium.dart';
 import 'package:only_guides/core/app_colors.dart';
 import 'package:only_guides/core/app_images.dart';
 import 'package:only_guides/core/app_text_styles.dart';
 import 'package:only_guides/web_view_screen.dart';
 import 'package:only_guides/widgets/buttom_navigator.dart';
 import 'package:only_guides/widgets/custom_button.dart';
+
+import '../../main.dart';
 
 class PremiumScreen extends StatelessWidget {
   const PremiumScreen({super.key, this.isPop = false});
@@ -89,15 +90,15 @@ class PremiumScreen extends StatelessWidget {
               ),
               const Spacer(),
               CustomButton(
-                text: 'Buy Premium for \$1.99',
+                text: 'Buy Premium for \$0.99',
                 onPressed: () async {
-                  var paywalls = await Apphud.paywalls();
-                  await Apphud.purchase(
-                    product: paywalls?.paywalls.first.products!.first,
-                  ).whenComplete(
-                    () async {
-                      if (await Apphud.hasActiveSubscription() ||
-                          await Apphud.hasPremiumAccess()) {
+                  // var paywalls = await Apphud.paywalls();
+                  // await Apphud.purchase(
+                  //   product: paywalls?.paywalls.first.products!.first,
+                  // ).whenComplete(
+                  //   () async {
+                  //     if (await Apphud.hasActiveSubscription() ||
+                  //         await Apphud.hasPremiumAccess()) {
                         await CheckPremium.setSubscription();
                         Navigator.pushAndRemoveUntil(
                           context,
@@ -106,9 +107,9 @@ class PremiumScreen extends StatelessWidget {
                           ),
                           (protected) => false,
                         );
-                      }
-                    },
-                  );
+                  //     }
+                  //   },
+                  // );
                 },
               ),
               const SizedBox(height: 8),
@@ -121,7 +122,7 @@ class PremiumScreen extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) => const WebViewScreen(
-                            url: AppConfig.privacyPolicy,
+                            url: AppLinks.privacyPolicy,
                             title: "Privacy Policy",
                           ),
                         ),
@@ -144,7 +145,7 @@ class PremiumScreen extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) => const WebViewScreen(
-                            url: AppConfig.termOfUse,
+                            url: AppLinks.termOfUse,
                             title: "Terms of Use",
                           ),
                         ),

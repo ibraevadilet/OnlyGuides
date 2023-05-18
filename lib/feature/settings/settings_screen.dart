@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:only_guides/config/app_config.dart';
-import 'package:only_guides/config/check_premium.dart';
-import 'package:only_guides/config/check_restore.dart';
+import 'package:only_guides/utils/check_premium.dart';
+import 'package:only_guides/utils/check_restore.dart';
 import 'package:only_guides/core/app_colors.dart';
 import 'package:only_guides/core/app_images.dart';
 import 'package:only_guides/core/app_text_styles.dart';
@@ -9,6 +8,8 @@ import 'package:only_guides/feature/auth/premium_screen.dart';
 import 'package:only_guides/feature/settings/widget/widget_row.dart';
 import 'package:only_guides/web_view_screen.dart';
 import 'package:only_guides/widgets/spaces.dart';
+
+import '../../main.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -32,25 +33,8 @@ class SettingsScreen extends StatelessWidget {
                   future: CheckPremium.getSubscription(),
                   builder: (context, AsyncSnapshot<bool?> snapshot) {
                     if (snapshot.hasData) {
-                      {
-                        if (snapshot.data!) {
-                          return Container(
-                            alignment: Alignment.center,
-                            padding: const EdgeInsets.all(12),
-                            height: 100,
-                            width: getWidth(context),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              border:
-                                  Border.all(color: AppColors.color00ADEFBlue1),
-                            ),
-                            child: WidgetRow(
-                              onTap: () {},
-                              icon: AppImages.restoryIcon,
-                              text: "Restore purchases",
-                            ),
-                          );
-                        }
+                      if (snapshot.data!) {
+                        return SizedBox();
                       }
                     }
                     return Container(
@@ -130,7 +114,7 @@ class SettingsScreen extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => const WebViewScreen(
-                              url: AppConfig.privacyPolicy,
+                              url: AppLinks.privacyPolicy,
                               title: "Privacy Policy",
                             ),
                           ),
@@ -146,7 +130,7 @@ class SettingsScreen extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => const WebViewScreen(
-                              url: AppConfig.termOfUse,
+                              url: AppLinks.termOfUse,
                               title: "Terms of Use",
                             ),
                           ),
@@ -162,7 +146,7 @@ class SettingsScreen extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => const WebViewScreen(
-                              url: AppConfig.supportForm,
+                              url: AppLinks.supportForm,
                               title: "Support",
                             ),
                           ),
