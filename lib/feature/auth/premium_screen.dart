@@ -4,6 +4,7 @@ import 'package:only_guides/utils/check_premium.dart';
 import 'package:only_guides/core/app_colors.dart';
 import 'package:only_guides/core/app_images.dart';
 import 'package:only_guides/core/app_text_styles.dart';
+import 'package:only_guides/utils/check_restore.dart';
 import 'package:only_guides/web_view_screen.dart';
 import 'package:only_guides/widgets/buttom_navigator.dart';
 import 'package:only_guides/widgets/custom_button.dart';
@@ -92,13 +93,13 @@ class PremiumScreen extends StatelessWidget {
               CustomButton(
                 text: 'Buy Premium for \$0.99',
                 onPressed: () async {
-                  // var paywalls = await Apphud.paywalls();
-                  // await Apphud.purchase(
-                  //   product: paywalls?.paywalls.first.products!.first,
-                  // ).whenComplete(
-                  //   () async {
-                  //     if (await Apphud.hasActiveSubscription() ||
-                  //         await Apphud.hasPremiumAccess()) {
+                  var paywalls = await Apphud.paywalls();
+                  await Apphud.purchase(
+                    product: paywalls?.paywalls.first.products!.first,
+                  ).whenComplete(
+                    () async {
+                      if (await Apphud.hasActiveSubscription() ||
+                          await Apphud.hasPremiumAccess()) {
                         await CheckPremium.setSubscription();
                         Navigator.pushAndRemoveUntil(
                           context,
@@ -107,9 +108,9 @@ class PremiumScreen extends StatelessWidget {
                           ),
                           (protected) => false,
                         );
-                  //     }
-                  //   },
-                  // );
+                      }
+                    },
+                  );
                 },
               ),
               const SizedBox(height: 8),
@@ -134,6 +135,9 @@ class PremiumScreen extends StatelessWidget {
                     ),
                   ),
                   InkWell(
+                    onTap: () {
+                      CheckRestore.checkRestore(context);
+                    },
                     child: Text(
                       'Restore purchases',
                       style: AppTextStyles.s13W400(color: AppColors.black),
